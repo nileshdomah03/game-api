@@ -1,0 +1,144 @@
+<!-- game-detail.component.html -->
+ <div>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-body">
+          <!-- Conditionally display content or 'not found' message based on game availability -->
+          <div
+            *ngIf="game && game.id; then content; not_found"
+            class="game-detail"
+          ></div>
+          <ng-template #content>
+            <div class="detail-container">
+              <h2 class="card-title">{{ game.title }} Details</h2>
+              <div class="card-text">
+                <!-- Display game details -->
+                <p class="form-group"><strong>Id:</strong> {{ game.id }}</p>
+                <p class="form-group">
+                  <strong>Title:</strong> {{ game.title }}
+                </p>
+                <p class="form-group">
+                  <strong>Developer:</strong> {{ game.developer }}
+                </p>
+                <p class="form-group">
+                  <strong>Genre:</strong> {{ game.genre }}
+                </p>
+                <p class="form-group">
+                  <strong>Description:</strong> {{ game.description }}
+                </p>
+                <p class="form-group">
+                  <strong>Price:</strong> {{ game.price | currency }}
+                </p>
+              </div>
+              <div class="button-group mt-3">
+                <!-- Edit button triggers editGame function -->
+                <button
+                  type="button"
+                  class="btn btn-secondary me-2"
+                  (click)="editGame()"
+                >
+                  Edit
+                </button>
+                <!-- Delete button triggers deleteGame function -->
+                <button
+                  type="button"
+                  class="btn btn-danger"
+                  (click)="deleteGame()"
+                >
+                  Delete
+                </button>
+                <div class="button-group mt-3">
+                  <!-- Add to Cart button triggers addToCart function -->
+                  <button
+                    type="button"
+                    class="btn btn-secondary me-2"
+                  >
+                    Add to Cart
+                  </button>
+                </div>
+                <div>
+                  <div class="Dropdown">
+                    <!-- Buy Now button toggles payment form visibility -->
+                    <button
+                      type="button"
+                      class="btn btn-primary mt-2"
+                      (click)="buyNow(game)"
+                    >
+                      Buy Now
+                    </button>
+                    <h3>
+                      <button
+                      type="button"
+                      class="btn btn-secondary me-2"
+                      onclick="back"
+                    >
+                      back
+                    </button>
+
+                    </h3>
+                    <!-- Payment form shown if showPaymentForm is true -->
+                    <div *ngIf="showPaymentForm" class="card mt-4">
+                      <div class="card-header">Payment Details</div>
+                      <div class="card-body">
+                        <h5 class="card-title">
+                          Enter Your Payment Information
+                        </h5>
+                        <form>
+                          <!-- Input fields for payment details -->
+                          <div class="mb-3">
+                            <label for="cardNumber" class="form-label"
+                              >Card Number</label
+                            >
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="cardNumber"
+                              placeholder="1234 5678 9012 3456"
+                            />
+                          </div>
+                          <div class="mb-3">
+                            <label for="expiryDate" class="form-label"
+                              >Expiry Date</label
+                            >
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="expiryDate"
+                              placeholder="MM/YY"
+                            />
+                          </div>
+                          <div class="mb-3">
+                            <label for="cvv" class="form-label">CVV</label>
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="cvv"
+                              placeholder="123"
+                            />
+                          </div>
+                          <!-- Submit button for payment form -->
+                          <button type="submit" class="btn btn-primary">
+                            Submit Payment
+                          </button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <ng-template #not_found>
+                  <!-- Message displayed if game not found -->
+                  <div class="alert alert-danger" role="alert">
+                    Game not found
+                  </div>
+                </ng-template>
+              </div>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

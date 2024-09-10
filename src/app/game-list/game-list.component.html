@@ -1,0 +1,88 @@
+<div class="container">
+  <h2 class="my-4">Game List</h2>
+  <!-- Search Bar and Button -->
+  <div class="search-container mb-4">
+    <input
+      type="text"
+      [(ngModel)]="searchTerm"
+      placeholder="Search games..."
+      class="form-control"
+    />
+    <button (click)="searchGame()" class="btn btn-primary mt-2 hover-effect">
+      Search
+    </button>
+  </div>
+  <!-- Button to Add New Game -->
+  <button class="btn btn-success mb-4 hover-effect" (click)="addGame()">
+    Add Game
+  </button>
+
+  <h4>
+    <!-- Display message when no games are found -->
+    <div
+      *ngIf="filteredGames.length === 0 && searchTerm.trim() !== ''"
+      class="game-not-found"
+    >
+      Game not found!!!
+    </div>
+  </h4>
+
+  <!-- Game Carousel -->
+  <div id="gameCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <!-- Loop through game groups to display in carousel items -->
+      <div
+        *ngFor="let group of gameGroups; let i = index"
+        [ngClass]="{ 'carousel-item': true, active: i === 0 }"
+      >
+        <div class="row">
+          <!-- Loop through each game in the group -->
+          <div class="col-md-4 mb-4" *ngFor="let game of group">
+            <!-- Card for each game -->
+            <div class="card h-100" style="width: 5cm; height: 7cm">
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title">{{ game.title }}</h5>
+                <div class="mt-auto">
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <!-- Button to view more details about the game -->
+                    <button
+                      type="button"
+                      class="btn btn-sm btn-outline-secondary hover-effect"
+                      (click)="showMore(game.id)"
+                    >
+                      View Item
+                    </button>
+                    <small class="text-muted">{{
+                      game.price | currency
+                    }}</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Carousel controls for navigating through game groups -->
+    <button
+      class="carousel-control-prev"
+      type="button"
+      data-bs-target="#gameCarousel"
+      data-bs-slide="prev"
+    >
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button
+      class="carousel-control-next"
+      type="button"
+      data-bs-target="#gameCarousel"
+      data-bs-slide="next"
+    >
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+</div>

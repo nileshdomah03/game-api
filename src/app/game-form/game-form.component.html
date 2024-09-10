@@ -1,0 +1,130 @@
+<!-- Modal Overlay ** interface for the ADD/EDIT game, ensure all data are filled in -->
+<div class="modal-overlay" *ngIf="isModalOpen">
+  <!-- Modal Container -->
+  <div class="modal-container">
+    <h2>{{ isEditMode ? "Edit" : "Add" }} Game</h2>
+    <form [formGroup]="gameForm" (ngSubmit)="saveGame()">
+      <div class="form-group">
+        <label for="title">Title:</label>
+        <input
+          type="text"
+          id="title"
+          formControlName="title"
+          class="form-control"
+        />
+        <!-- Validation error message for title field -->
+        <div
+          *ngIf="
+            gameForm.get('title')?.invalid &&
+            (gameForm.get('title')?.dirty || gameForm.get('title')?.touched)
+          "
+          class="text-danger"
+        >
+          <div *ngIf="gameForm.get('title')?.errors?.['required']">
+            This field cannot be empty
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="developer">Developer:</label>
+        <input
+          type="text"
+          id="developer"
+          formControlName="developer"
+          class="form-control"
+        />
+        <!-- Validation error message for developer field -->
+        <div
+          *ngIf="
+            gameForm.get('developer')?.invalid &&
+            (gameForm.get('developer')?.dirty ||
+              gameForm.get('developer')?.touched)
+          "
+          class="text-danger"
+        >
+          <div *ngIf="gameForm.get('developer')?.errors?.['required']">
+            This field cannot be empty
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="genre">Genre:</label>
+        <input
+          type="text"
+          id="genre"
+          formControlName="genre"
+          class="form-control"
+        />
+        <!-- Validation error message for genre field -->
+        <div
+          *ngIf="
+            gameForm.get('genre')?.invalid &&
+            (gameForm.get('genre')?.dirty || gameForm.get('genre')?.touched)
+          "
+          class="text-danger"
+        >
+          <div *ngIf="gameForm.get('genre')?.errors?.['required']">
+            This field cannot be empty
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="description">Description:</label>
+        <textarea
+          id="description"
+          formControlName="description"
+          class="form-control"
+        ></textarea>
+        <!-- Validation error message for description field -->
+        <div
+          *ngIf="
+            gameForm.get('description')?.invalid &&
+            (gameForm.get('description')?.dirty ||
+              gameForm.get('description')?.touched)
+          "
+          class="text-danger"
+        >
+          <div *ngIf="gameForm.get('description')?.errors?.['required']">
+            This field cannot be empty
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="price">Price:</label>
+        <input
+          type="number"
+          id="price"
+          formControlName="price"
+          class="form-control"
+        />
+        <!-- Validation error message for price field -->
+        <div
+          *ngIf="
+            gameForm.get('price')?.invalid &&
+            (gameForm.get('price')?.dirty || gameForm.get('price')?.touched)
+          "
+          class="text-danger"
+        >
+          <div *ngIf="gameForm.get('price')?.errors?.['required']">
+            This field cannot be empty
+          </div>
+        </div>
+      </div>
+
+      <!-- Submit button, disabled if the form is invalid -->
+      <button
+        type="submit"
+        class="btn btn-primary"
+        [disabled]="gameForm.invalid"
+      >
+        {{ isEditMode ? "Update" : "Add" }} Game
+      </button>
+    </form>
+    <!-- Close Button -->
+    <button class="btn btn-secondary mt-3" (click)="closeModal()">Close</button>
+  </div>
+</div>

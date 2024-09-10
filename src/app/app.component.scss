@@ -1,0 +1,16 @@
+/* src/app/app.component.css */
+nav {
+  margin-bottom: 20px;
+}
+
+nav a {
+  margin-right: 10px;
+}
+
+h1 {
+  color: hsl(0, 100%, 50%);
+  text-align: center;
+  //background: url('https://wallpapercave.com/wp/wp2777682.jpg');
+  background-size: 100%;
+  background-image: linear-gradient(to right, rgba(216, 241, 69, 0.822), rgb(19, 223, 178));
+}
